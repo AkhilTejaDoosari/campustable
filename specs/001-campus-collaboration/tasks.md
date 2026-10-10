@@ -7,5 +7,5 @@
 - [ ] Implement open roles, requests, atomic acceptance, membership and conversations
 - [ ] Implement block/report/closure and outcome states
 - [ ] Run meaningful negative, concurrency, integration and responsive UI checks
-- [ ] Add CI, container and operational/restore documentation
+- [x] Add CI, container and operational/restore documentation
 - [ ] Record live setup blockers and final evidence
