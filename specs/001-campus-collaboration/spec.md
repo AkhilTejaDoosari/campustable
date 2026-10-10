@@ -36,3 +36,18 @@ Given block or closed project, further prohibited contact/join is rejected. Memb
 Given failed dependency, show error and preserve draft; never claim saved when it failed.
 Given completed milestone or self-reported outcome, identify it as self-report. Product success measured through a confirmed first contribution, not sign-up counts.
 Before live release: migration/RLS tests, build/lint/typecheck, responsive keyboard UI checks, reviewed retention/upload policy, actual restore exercise. Separate automated test pass from manual observations.
+
+# Implementation decisions (settled 2026-10-10; authoritative detail in docs/DECISIONS.md)
+
+This section makes the contract above decision-complete for implementers. All items are settled except live SMTP delivery, which is BLOCKED on credentials. Nothing here is production-ready.
+
+1. Acceptance transaction: `accept_collaboration_request(request_id)` Postgres function is THE boundary — owner check, `SELECT ... FOR UPDATE` on `project_roles`, capacity check, idempotent retry (already-`accepted` returns existing rows), atomic membership + conversation creation. See decisions-log.md D1 for the operation sequence and typed errors.
+2. Pair-intro limit: one pre-acceptance introduction per account pair via normalized `LEAST`/`GREATEST` pair unique index covering ALL statuses (declined/withdrawn included). Already-connected users applying to a further project create a project-scoped application row, not a second intro. See D2.
+3. Role capacity: `project_roles.capacity` positive integer (default 1); accept fails `conflict` when active memberships >= capacity; concurrent accepts serialized on the role row lock. See D3.
+4. University challenge: 6-digit OTP over real SMTP (vendor undecided: Resend / Supabase Auth email candidates); `sha256` code_hash only, 15-min expiry, max 5 attempts, per-email rate limit with shared enforcement. Live delivery BLOCKED until SMTP creds supplied; test/demo deterministic hashes labeled SIMULATED and isolated. See D4.
+5. Reviewer interface: minimal server-rendered queue page in apps/web (approve/reject + audit fields); no separate service. See D5.
+6. Retention/operations: 24h RPO / 4h RTO are aspirational until the first restore drill; uploads deleted with account after 30-day grace. See D6.
+7. Normalization: trim + lowercase only; no Gmail dot rewriting. Canonical school email globally unique on the normalized value. See D7.
+8. Permission matrix: every table x anonymous / member / owner-party / reviewer-service is tabulated in docs/DECISIONS.md; RLS + server-side enforcement on all rows; blocked pairs cannot contact; denied reads return safe `unavailable`.
+9. Lifecycle invariants: affiliation `self_reported -> pending -> verified/rejected` (mailbox_verified distinct from reviewed; faculty needs both); project `draft -> open -> in_progress -> completed/closed` (closure terminal); role `open -> filled/closed`; request `pending -> accepted/declined/withdrawn` (decline silent, withdrawal keeps intro consumed); membership `active -> left/removed`; no self-join, no duplicate active (project, user), local-only enforced server-side.
+10. V1 exclusions (explicit): recruiters, job boards, paid services/payments, social feed, followers/likes, events/clubs, courses, formal mentorship programs, AI assistant/BYOK, Jira-style task management. No adoption numbers, launch dates, or uptime claims.
