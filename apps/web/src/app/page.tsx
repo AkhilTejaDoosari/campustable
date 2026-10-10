@@ -1,0 +1,1 @@
+export default function Home(){return <main className="mx-auto max-w-3xl p-12"><h1 className="text-4xl font-bold">CampusTable</h1><p className="mt-4">Engineering foundation ready. Read START-HERE.md at the repository root to begin V1 implementation.</p></main>}

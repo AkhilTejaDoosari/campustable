@@ -1,0 +1,11 @@
+# Tasks
+- [ ] Resolve documented proposed schema/lifecycle/API contracts and log decisions
+- [ ] Implement permission matrix and tested Supabase migrations
+- [ ] Implement personal auth and explicit university verification transport boundary
+- [ ] Implement role-adaptive onboarding/profile/visibility
+- [ ] Implement required brief draft/publish/search/eligibility
+- [ ] Implement open roles, requests, atomic acceptance, membership and conversations
+- [ ] Implement block/report/closure and outcome states
+- [ ] Run meaningful negative, concurrency, integration and responsive UI checks
+- [ ] Add CI, container and operational/restore documentation
+- [ ] Record live setup blockers and final evidence

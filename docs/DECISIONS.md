@@ -1,0 +1,4 @@
+# Decisions
+Accepted: project-first collaboration; students primary with alumni/faculty; no recruiters/payments/feed/AI/tasks in V1; required project purpose/observable success criteria; multiple universities with explicit visibility; Starkwolf + Supabase Cloud + DuckDNS; retain new public campustable repo (brand rename independent).
+Proposed: PostgreSQL transaction boundary for acceptance; immutable pair intro limit; final role capacity model; university challenge delivery provider; verification reviewer interface; retention/deletion timelines; operational targets.
+Agent may settle routine implementation choices within scope, record rationale and revisit trigger. Missing external credentials/provider setup are blockers, not permission to invent live services. No large additions without a new product decision.

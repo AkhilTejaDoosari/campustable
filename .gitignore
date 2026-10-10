@@ -1,0 +1,10 @@
+
+# CampusTable private runtime files
+.env
+.env.*
+!.env.example
+node_modules/
+.next/
+coverage/
+playwright-report/
+test-results/

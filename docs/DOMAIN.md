@@ -1,0 +1,7 @@
+# Domain proposals to finalize before migrations
+Account owns one profile; account has many university affiliations. Universities have many approved exact domains; domain mappings reviewed.
+Account role is an affiliation role, not proof inferred from email suffix. Affiliation: self_reported -> pending -> verified/rejected; mailbox_verified is distinct from faculty reviewed.
+Project belongs to one owner and has many open roles, requests, memberships. Owner is a member. Applicant proposes contributor/advisor role and commitment.
+Project states draft -> open -> in_progress -> completed/closed; no backwards reopening without explicit rule. Role open -> filled/closed. Request pending -> accepted/declined/withdrawn. Membership active -> left/removed. Define removal rights and notifications before implementation.
+Invariants: canonical school email globally unique; immutable normalized identity with documented normalization (trim + lowercase, no Gmail dot rewriting); acceptance authorized to owner and atomic with capacity/membership; no duplicate active membership; no requester self-join; local-only eligibility enforced on server; closed roles cannot accept; blocked pairs cannot contact.
+One pre-acceptance introduction per account pair; acceptance grants messaging. Project requests reference project/role without bypassing pair limit. Finalize how already-connected users apply to another project without sending a second introduction; document this as an operation in API.
