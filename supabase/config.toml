@@ -1,0 +1,3 @@
+[storage]
+# Private buckets are created by migration 0005 via SQL (storage.buckets).
+# Do not create public buckets for resumes/avatars/evidence.

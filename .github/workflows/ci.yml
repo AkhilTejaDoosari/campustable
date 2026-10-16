@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npx prettier --check .
+      - run: npm run typecheck --workspaces --if-present
+      - run: npm run lint --workspaces --if-present
+      - run: npm run test --workspaces --if-present
+      - run: npm run build --workspaces --if-present
+      # Keyless build is intentional: public pages must prerender without secrets;
+      # auth-gated routes are force-dynamic and fail closed at runtime.
+      - name: Validate migrations present
+        run: ls supabase/migrations/*.sql

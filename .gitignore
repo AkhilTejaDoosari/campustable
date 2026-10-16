@@ -1,0 +1,13 @@
+# Secrets: examples are safe templates; actual values must remain private.
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+.next/
+coverage/
+playwright-report/
+test-results/
+.DS_Store
+
