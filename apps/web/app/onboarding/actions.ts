@@ -61,7 +61,8 @@ export async function saveAffiliation(formData: FormData): Promise<void> {
     .from("universities")
     .select("id")
     .eq("name", parsed.data.universityName)
-    .single();  let universityId: string | null = uni?.id ?? null;
+    .single();
+  let universityId: string | null = uni?.id ?? null;
   if (!universityId) {
     const { data: created, error: uniError } = await supabase
       .from("universities")
