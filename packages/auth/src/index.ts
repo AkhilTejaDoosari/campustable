@@ -18,7 +18,7 @@ function adminClient(): SupabaseClient {
   return createClient(url, key, { auth: { persistSession: false } });
 }
 
-function toLocalUser(row: {
+export function toLocalUser(row: {
   id: string;
   clerk_user_id: string;
   primary_email: string;

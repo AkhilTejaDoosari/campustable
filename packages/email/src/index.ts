@@ -39,13 +39,10 @@ export class ResendEmailService implements EmailService {
   }
 }
 
-/** Development fallback: logs to console. Never reports fake delivery as verified. */
 export class ConsoleEmailService implements EmailService {
   constructor(private from: string = "CampusTable <noreply@example.com>") {}
   async sendVerificationCode(to: string, code: string): Promise<SendResult> {
-    console.log(`[email:console] from=${this.from} to=${to} code=REDACTED(len=${code.length})`);
-    // In non-production this still returns ok so local flows can be exercised;
-    // production must configure RESEND_API_KEY (fail-closed in route via env check).
+    console.log(`[email:console] from=${this.from} to=${to} code=${code}`);
     return { ok: true, id: "console" };
   }
   async send(to: string, subject: string, _html: string): Promise<SendResult> {

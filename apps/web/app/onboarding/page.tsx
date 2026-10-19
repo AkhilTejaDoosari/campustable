@@ -24,6 +24,12 @@ const ERROR_COPY: Record<string, string> = {
   "E.INVALID_CODE": "Enter the 6-digit code.",
   "E.INVALID_PROFILE": "Enter a display name (1–80 characters).",
   "E.PROFILE_SAVE_FAILED": "Could not save your profile. Try again.",
+  "E.RESEND_THROTTLED": "Please wait 60 seconds before requesting another code.",
+  "E.CODE_EXPIRED": "The code has expired. Request a new one.",
+  "E.ATTEMPTS_EXHAUSTED": "Too many incorrect attempts. Request a new code.",
+  "E.NO_ACTIVE_CHALLENGE": "No pending verification. Request a new code.",
+  "E.DELIVERY_FAILED": "Could not send the code. Try again.",
+  "E.CONSUME_FAILED": "Verification failed. Request a new code.",
 };
 
 function inputClass() {
